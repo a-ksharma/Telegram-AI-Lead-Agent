@@ -40,9 +40,8 @@ When a lead messages the bot on Telegram:
 ```
 lead-agent/
 ├── main.py                    # Entry point — webhook server + handler registration
-├── config.py                  # All env vars loaded here; all modules import from here
+├── config.py                  # All env vars loaded here
 ├── requirements.txt
-├── .env                       # Never committed — see Environment Variables section
 ├── handlers/
 │   ├── message_handler.py     # Incoming message routing + AI response dispatch
 │   └── onboarding_handler.py  # ConversationHandler for structured onboarding flow
@@ -73,30 +72,7 @@ Five tables in Supabase:
 - **`bookings`** — scheduled discovery calls (calendar_event_id, meet_link, scheduled_at)
 - **`tool_call_logs`** — every tool invocation with inputs, result, success flag
 
----
 
-## Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# Telegram
-TELEGRAM_BOT_TOKEN=your_bot_token
-ADMIN_CHAT_ID=your_telegram_user_id
-
-# AI Providers
-LLM_PROVIDER=groq                  # or "gemini"
-GROQ_API_KEY=your_groq_key
-GEMINI_API_KEY=your_gemini_key     # optional, for future use
-
-# Supabase
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_anon_key
-
-# Deployment
-RENDER_EXTERNAL_URL=https://your-bot-service.onrender.com
-PORT=8000
-```
 
 ---
 
@@ -204,36 +180,3 @@ Zero code changes required. Set in `.env`:
 LLM_PROVIDER=groq     # default, free tier
 LLM_PROVIDER=gemini   # when Gemini key is available
 ```
-
----
-
-## Gitignore
-
-Make sure these are in your `.gitignore`:
-
-```
-.env
-credentials.json
-token.pickle
-gmail_token.pickle
-__pycache__/
-*.pyc
-.venv/
-```
-
----
-
-## Milestones Completed
-
-- [x] Echo bot
-- [x] Stateful conversation
-- [x] AI-powered replies
-- [x] Lead capture to Supabase
-- [x] Lead qualification flow
-- [x] Human escalation with admin alerts
-- [x] LLM provider abstraction (Groq + Gemini)
-- [x] Onboarding flow
-- [x] Tool calling (Calendar, Gmail, Supabase)
-- [x] Streamlit admin dashboard
-- [ ] Production deployment on Render
-- [ ] Live end-to-end Telegram test

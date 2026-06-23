@@ -1,3 +1,7 @@
+import os
+print(os.listdir('.'))          # what's in working directory?
+print(os.path.exists('token.pickle'))
+print(os.path.exists('/etc/secrets/token.pickle'))
 from telegram.ext import ApplicationBuilder
 from telegram.ext import MessageHandler, filters
 from handlers.message_handler import handle_message

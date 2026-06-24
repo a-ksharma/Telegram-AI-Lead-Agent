@@ -240,7 +240,7 @@ async def handle_confirm(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         from config import ADMIN_CHAT_ID
         from database.db import update_lead_status
 
-        update_lead_status(user.id, "escalated")
+        update_lead_status(user.id, "escalated", is_escalated=True)
 
         alert = (
             f"*Escalation at onboarding stage*\n"

@@ -31,7 +31,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     print("DEBUG ai_response:", ai_response)
 
-    update_lead_status(user_id, ai_response["status"], ai_response["is_escalated"])
+    update_lead_status(user_id, ai_response["status"], is_escalated=ai_response["is_escalated"])
 
     alert_text = f"Escalation Alert!\nUser ID: {user_id}\nUsername: @{username}\nLast message: {text}"
 

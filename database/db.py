@@ -202,15 +202,18 @@ def get_escalated_leads():
         return []
 
 
-def update_lead_status(telegram_user_id: int, new_status: str):
+def update_lead_status(telegram_user_id: int, new_status: str, is_escalated: bool = None):
     """
     Update the status field of a lead.
     Valid values: new / engaged / qualified / escalated / closed
     Used by the dashboard's quick-action buttons.
     Returns {"success": True} or {"success": False, "error": ...}
     """
+    update_data = {"status": new_status}
+    if is_escalated is not None:
+        update_data["is_escalated"] = is_escalated
     try:
-        supabase.table("leads").update({"status": new_status}).eq(
+        supabase.table("leads").update(update_data).eq(
             "telegram_user_id", telegram_user_id
         ).execute()
         return {"success": True}
